@@ -8,8 +8,8 @@
     "start": "nodemon api/index.js",
     "dev": "nodemon api/index.js",
     "db:migrate": "prisma migrate dev",
-    "db:generate": "prisma generate",
-    "db:seed": "node prisma/seed.js"
+    "db:seed": "node prisma/seed.js",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.0",

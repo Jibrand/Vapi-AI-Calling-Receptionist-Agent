@@ -37,5 +37,5 @@ model ClinicSettings {
   clinicName String
   address    String
   phone      String
-  timezone   String   @default("America/Toronto")
+  timezone   String   @default("Asia/Karachi")
 }

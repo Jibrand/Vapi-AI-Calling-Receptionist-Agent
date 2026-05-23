@@ -7,6 +7,9 @@ import { apiLimiter } from './middleware/rateLimiter.js';
 
 const app = express();
 
+// Trust the proxy (required for express-rate-limit when using Ngrok/VAPI)
+app.set('trust proxy', 1);
+
 // Security Middleware
 app.use(helmet());
 

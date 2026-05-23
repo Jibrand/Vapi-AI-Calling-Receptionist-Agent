@@ -28,7 +28,7 @@ const getCalendarClient = () => {
   }
 };
 
-const TIMEZONE = 'America/Toronto';
+const TIMEZONE = 'Asia/Karachi';
 
 /**
  * Helper to construct a proper ISO string for Google Calendar

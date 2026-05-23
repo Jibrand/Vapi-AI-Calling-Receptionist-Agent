@@ -5,7 +5,7 @@ import prisma from '../config/db.js';
 import { createEvent, updateEvent, cancelEvent } from '../services/googleCalendarService.js';
 import { formatResponse } from '../utils/responseHelper.js';
 
-const TIMEZONE = 'America/Toronto';
+const TIMEZONE = 'Asia/Karachi';
 
 const getFirstName = (fullName) => {
   if (!fullName) return '';
@@ -174,7 +174,7 @@ export const lookupAppointment = async (req, res, next) => {
     if (!patient) {
        return res.status(200).json(formatResponse(
         true,
-        "I don't see any upcoming appointments linked to that phone number. Would you like to book one?",
+        "I don't see a profile linked to that phone number. Are you a new patient looking to book an appointment?",
         []
       ));
     }
@@ -195,10 +195,12 @@ export const lookupAppointment = async (req, res, next) => {
       }
     });
 
+    const firstName = patient.name ? patient.name.split(' ')[0] : 'there';
+
     if (appointments.length === 0) {
       return res.status(200).json(formatResponse(
         true,
-        "I don't see any upcoming appointments linked to that phone number. Would you like to book one?",
+        `Welcome back, ${firstName}! I don't see any upcoming appointments for you right now. Would you like to schedule one?`,
         []
       ));
     }
@@ -209,7 +211,7 @@ export const lookupAppointment = async (req, res, next) => {
 
     return res.status(200).json(formatResponse(
       true,
-      `I found ${appointments.length} upcoming appointment(s) for you. Your next appointment is on ${speakableDate} at ${speakableTime}.`,
+      `Welcome back, ${firstName}! I found ${appointments.length} upcoming appointment(s) for you. Your next appointment is on ${speakableDate} at ${speakableTime}.`,
       appointments
     ));
   } catch (error) {

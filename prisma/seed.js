@@ -12,7 +12,7 @@ async function main() {
       clinicName: 'BrightSmile Dental Clinic',
       address: '123 King Street West, Toronto, ON',
       phone: '416-555-0199',
-      timezone: 'America/Toronto',
+      timezone: 'Asia/Karachi',
     },
   });
   console.log('Created clinic settings:', clinicSettings.clinicName);
