@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id           String        @id @default(uuid())
+  name         String
+  email        String?
+  phone        String        @unique
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+}
+
+model Appointment {
+  id                 String   @id @default(uuid())
+  patientId          String
+  patient            Patient  @relation(fields: [patientId], references: [id])
+  reason             String
+  appointmentDate    String   // Format YYYY-MM-DD
+  appointmentTime    String   // Format HH:MM
+  status             String   @default("SCHEDULED") // SCHEDULED | CONFIRMED | CANCELLED | COMPLETED
+  googleEventId      String?
+  googleMeetLink     String?
+  cancellationReason String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model ClinicSettings {
+  id         String   @id @default(uuid())
+  clinicName String
+  address    String
+  phone      String
+  timezone   String   @default("America/Toronto")
+}
